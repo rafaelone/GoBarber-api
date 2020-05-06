@@ -4,8 +4,6 @@ import ICreateAppointmentDTO from '@modules/appointments/dtos/ICreateAppointment
 
 import Appointment from '../entities/Appointment';
 
-// DTO -> Data transfer Object
-
 class AppointmentsRepository implements IAppointmentsRepository {
   private ormRepository: Repository<Appointment>;
 
@@ -25,7 +23,11 @@ class AppointmentsRepository implements IAppointmentsRepository {
     provider_id,
     date,
   }: ICreateAppointmentDTO): Promise<Appointment> {
-    const appointment = this.ormRepository.create({ provider_id, date });
+    const appointment = this.ormRepository.create({
+      provider_id,
+      date,
+    });
+
     await this.ormRepository.save(appointment);
     return appointment;
   }
